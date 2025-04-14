@@ -1,0 +1,171 @@
+<h1 id="application-visits">Application Visits</h1>
+
+<h2 id="advance">Advance</h2>
+
+<a href="/"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="advance">Advance</a>
+
+<br>
+
+<a href="#advance"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="advance">Advance (with fragment)</a>
+
+<br>
+
+<ul>
+  <li>
+    <a href="https://github.com/hotwired/turbo/issues/211" target="_blank" rel="noopener noreferrer">[BUG] - https://github.com/hotwired/turbo/issues/211</a>
+  </li>
+</ul>
+
+<h2 id="replace">Replace</h2>
+
+<br>
+
+<a href="/"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="replace">Replace</a>
+
+<br>
+
+<a href="#replace"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="replace">Replace (with fragment)</a>
+
+<br>
+
+<ul>
+  <li>
+    <a href="https://github.com/hotwired/turbo/issues/211" target="_blank" rel="noopener noreferrer">[BUG] - https://github.com/hotwired/turbo/issues/211</a>
+  </li>
+</ul>
+
+
+<br>
+
+<h2 id="confirmation">Confirmation</h2>
+
+<a href="/"
+     data-turbo="true"
+     data-turbo-method="get"
+     data-turbo-confirm="Do you want to leave this page?">Confirmation</a>
+
+<br>
+
+You can customize confirmation popup for all forms.
+
+<%#
+  <script>
+    document.addEventListener("turbo:load", function () {
+      Turbo.config.forms.confirm = () => {
+        let dialog = document.querySelector("dialog")
+        dialog.showModal()
+        return new Promise((resolve, reject) => {
+          dialog.addEventListener("close", () => {
+            resolve(dialog.returnValue == "confirm")
+          }, { once: true })
+        })
+      }
+    })
+  </script>
+%>
+
+<a href="/"
+     data-turbo="true"
+     data-turbo-method="get"
+     data-turbo-confirm="Do you want to leave this page?">Confirmation (custom)</a>
+
+<dialog>
+  <form action="/">
+      <p>Are you sure?</p>
+    <button value="cancel">Cancel</button>
+    <button value="confirm">Confirm</button>
+  </form>
+</dialog>
+
+<br>
+
+<h2>Form submissions</h2>
+
+regular turbo stream request
+
+can render response in turbo frame
+
+<form
+   action="/"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+  <input type="submit">
+</form>
+
+<br>
+
+can render server side validations in place (422)
+
+<form
+   action="/examples/three"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+
+   <input type="text" name="required" placeholder="leave this empty" style="<%= "border: 2px solid red" if @unprocessable_entity %>">
+  <input type="submit">
+</form>
+
+<br>
+
+can render server side validations in place (500)
+
+<form
+   action="/examples/three"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+   <input type="text" name="required_500" placeholder="leave this empty" style="<%= "border: 2px solid red" if @internal_server_error %>">
+  <input type="submit">
+</form>
+
+<br>
+
+<strong>cannot</strong> render server side validations in place (200)
+<p>This doesn't apply to forms that make GET requests.
+    <blockquote>The reason Turbo doesn’t allow regular rendering on 200’s from POST requestsis that browsers have built-in behavior for dealing with reloads on POST visits where they present a “Are you sure you want to submit this form again?” dialogue that Turbo can’t replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.</blockquote>
+</p>
+
+<form
+   action="/examples/three"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   >
+
+   <input type="text" name="ok" placeholder="leave this empty" style="<%= "border: 2px solid green" if @ok %>">
+  <input type="submit">
+</form>
+
+<br>
+
+can render response directly in turbo frame on current page
+
+<form
+   action="/examples/two"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   data-turbo-frame="form-submit"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit">submit the form and I'll change!</turbo-frame>
