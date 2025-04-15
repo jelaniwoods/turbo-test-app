@@ -131,9 +131,23 @@ You can customize confirmation popup for all forms.
    method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="get"
+   data-turbo-method="post"
    >
   <input type="submit">
+</form>
+
+<br>
+
+can customize submit/button text when submitting
+
+<form
+   action="/"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+  <input type="submit" data-turbo-submits-with="hold on to your butts!">
 </form>
 
 <br>
@@ -166,6 +180,23 @@ can render server side validations in place (500)
    <input type="text" name="required_500" placeholder="leave this empty" style="<%= "border: 2px solid red" if @internal_server_error %>">
   <input type="submit">
 </form>
+
+<br>
+
+maintain scroll after submit: https://github.com/hotwired/turbo/issues/37#issuecomment-1768347223
+
+<turbo-frame id="form">
+  <form
+    action="/examples/three"
+    method="post"
+    data-turbo="true"
+    data-turbo-stream="true"
+    data-turbo-method="post"
+    >
+    <input type="text" name="frame_request" placeholder="leave this empty" style="<%= "border: 2px solid red" if @frame_request %>">
+    <input type="submit">
+  </form>
+</turbo-frame>
 
 <br>
 
@@ -246,7 +277,7 @@ can render <em>redirected</em> response directly in turbo frame on current page 
   document.addEventListener("turbo:before-render", async (event) => {
     if (event.originalTarget.baseURI.includes("five")) {
       event.preventDefault()
-    } else if (event.originalTarget.baseURI.includes("six")) {
+    } else if (event.originalTarget.baseURI.includes("eight")) {
       event.detail.render = (currentElement, newElement) => {
         if (!document.documentElement.hasAttribute('data-turbo-preview')) {
           // from https://github.com/hotwired/turbo/blob/main/src/core/drive/page_renderer.ts#L149
@@ -302,7 +333,7 @@ can render <em>redirected</em> response directly in turbo frame on current page 
 
 <h2>Custom Rendering</h2>
 
-<a href="/examples/six"
+<a href="/examples/eight"
      data-turbo="true"
      data-turbo-stream="true"
      data-action="advance">custom render image</a>
@@ -326,6 +357,9 @@ can render <em>redirected</em> response directly in turbo frame on current page 
 </form>
 
 Events:
+
+https://hotwire.io/documentation/turbo/reference/events
+
 <ol>
   <li id="start" style="color: grey;">turbo:submit-start</li>
   <li id="request" style="color: grey;">turbo:before-fetch-request</li>

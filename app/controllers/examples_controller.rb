@@ -18,10 +18,11 @@ class ExamplesController < ApplicationController
     elsif params.key?(:required_500) && params[:required_500].blank?
       @internal_server_error = true
       render :one, status: :internal_server_error 
+    elsif params.key?(:frame_request) && turbo_frame_request?
+      @frame_request = true
+      render :one, status: :internal_server_error 
     elsif params.key?(:ok)
       @ok = true
-      p params
-      p request.method
       render :one, status: :ok 
     end
   end
