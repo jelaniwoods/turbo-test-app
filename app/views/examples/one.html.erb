@@ -1,15 +1,17 @@
 <h1 id="application-visits">Application Visits</h1>
 
-<h2 id="advance">Advance</h2>
+<h2>Links</h2>
 
-<a href="/"
+<h3 id="advance">Advance</h3>
+
+<a href="/examples/one"
      data-turbo="true"
      data-turbo-stream="true"
      data-action="advance">Advance</a>
 
 <br>
 
-<a href="#advance"
+<a href="/examples/one#advance"
      data-turbo="true"
      data-turbo-stream="true"
      data-action="advance">Advance (with fragment)</a>
@@ -22,7 +24,7 @@
   </li>
 </ul>
 
-<h2 id="replace">Replace</h2>
+<h3 id="replace">Replace</h3>
 
 <br>
 
@@ -76,6 +78,21 @@ You can customize confirmation popup for all forms.
   </script>
 %>
 
+<form
+   action="/examples/three"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   data-turbo-frame="custom-confirmation"
+   >
+  <input type="submit" value="Load custom confirmation">
+</form>
+
+<br>
+
+<turbo-frame id="custom-confirmation"></turbo-frame>
+
 <a href="/"
      data-turbo="true"
      data-turbo-method="get"
@@ -89,16 +106,29 @@ You can customize confirmation popup for all forms.
   </form>
 </dialog>
 
-<br>
+<hr>
 
 <h2>Form submissions</h2>
 
-regular turbo stream request
-
-can render response in turbo frame
+[GET] regular turbo stream request
 
 <form
    action="/"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+  <input type="submit">
+</form>
+
+<br>
+
+[POST] regular turbo stream request
+
+<form
+   action="/"
+   method="post"
    data-turbo="true"
    data-turbo-stream="true"
    data-turbo-method="get"
@@ -112,9 +142,10 @@ can render server side validations in place (422)
 
 <form
    action="/examples/three"
+   method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="get"
+   data-turbo-method="post"
    >
 
    <input type="text" name="required" placeholder="leave this empty" style="<%= "border: 2px solid red" if @unprocessable_entity %>">
@@ -127,9 +158,10 @@ can render server side validations in place (500)
 
 <form
    action="/examples/three"
+   method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="get"
+   data-turbo-method="post"
    >
    <input type="text" name="required_500" placeholder="leave this empty" style="<%= "border: 2px solid red" if @internal_server_error %>">
   <input type="submit">
@@ -138,8 +170,11 @@ can render server side validations in place (500)
 <br>
 
 <strong>cannot</strong> render server side validations in place (200)
-<p>This doesn't apply to forms that make GET requests.
-    <blockquote>The reason Turbo doesn’t allow regular rendering on 200’s from POST requestsis that browsers have built-in behavior for dealing with reloads on POST visits where they present a “Are you sure you want to submit this form again?” dialogue that Turbo can’t replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.</blockquote>
+<p>
+  <u>
+    This does not apply to forms that make GET requests.
+  </u>
+  <blockquote>The reason Turbo doesn’t allow regular rendering on 200’s from POST requestsis that browsers have built-in behavior for dealing with reloads on POST visits where they present a “Are you sure you want to submit this form again?” dialogue that Turbo can’t replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.</blockquote>
 </p>
 
 <form
@@ -156,16 +191,232 @@ can render server side validations in place (500)
 
 <br>
 
-can render response directly in turbo frame on current page
+can render response directly in turbo frame on current page [GET]
 
 <form
    action="/examples/two"
+   method="get"
    data-turbo="true"
    data-turbo-stream="true"
    data-turbo-method="get"
-   data-turbo-frame="form-submit"
+   data-turbo-frame="form-submit-get"
    >
   <input type="submit">
 </form>
 
-<turbo-frame id="form-submit">submit the form and I'll change!</turbo-frame>
+<turbo-frame id="form-submit-get">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+
+<br>
+
+can render <em>redirected</em> response directly in turbo frame on current page [POST]
+
+<form
+   action="/examples/two"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   data-turbo-frame="form-submit-post"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-post">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+
+<hr>
+
+<h2>Cancel request</h2>
+
+<a href="/examples/five"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="advance">Visit will be cancelled</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" integrity="sha512-f6bQMg6nkSRw/xfHw5BCbISe/dJjXrVGfz9BSDwhZtiErHwk7ifbmBEtF9vFW8UNIQPhV2uEFVyI/UHob9r7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  document.addEventListener("turbo:before-render", async (event) => {
+    if (event.originalTarget.baseURI.includes("five")) {
+      event.preventDefault()
+    } else if (event.originalTarget.baseURI.includes("six")) {
+      event.detail.render = (currentElement, newElement) => {
+        if (!document.documentElement.hasAttribute('data-turbo-preview')) {
+          // from https://github.com/hotwired/turbo/blob/main/src/core/drive/page_renderer.ts#L149
+          document.adoptNode(newElement);
+
+          const oldImage = currentElement.querySelector('img');
+          const newImage = newElement.querySelector('img');
+          oldImage.setAttribute('style', 'opacity: 1; z-index: 10;');
+
+          oldImage.insertAdjacentElement('afterend', newImage);
+
+          newImage.addEventListener('load', () => {
+            newImage.setAttribute(
+              'style',
+              'opacity: 0; z-index: 0; filter: invert(100%) blur(16px);'
+            );
+            gsap.to(oldImage, {
+              opacity: 0,
+              filter: 'invert(100%) blur(16px)',
+              duration: 2,
+              ease: 'power2.inOut',
+            });
+            gsap.to(newImage, {
+              opacity: 1,
+              filter: 'invert(0%) blur(0px)',
+              duration: 2,
+              ease: 'power2.inOut',
+            });
+
+            setTimeout(() => {
+              oldImage.remove();
+            }, 2000);
+          });
+        }
+      }
+    } else if(event.originalTarget.baseURI.includes("seven")) {
+      event.preventDefault()
+      await event.originalTarget.animate(
+        [
+          { transform: "rotate(0) scale(30)" },
+          { transform: "rotate(360deg) scale(0.5)" },
+        ], {
+          duration: 2000,
+          iteration: 1,
+        }
+      )
+      event.detail.resume()
+    }
+  })
+</script>
+
+<br>
+
+<h2>Custom Rendering</h2>
+
+<a href="/examples/six"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="advance">custom render image</a>
+
+<img src="https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="100" alt="photo of apple">
+
+<br>
+<hr>
+<br>
+
+<form
+   id="events"
+   action="/examples/five"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   data-turbo-frame="form-submit-events"
+   >
+  <input type="submit" value="Execute">
+</form>
+
+Events:
+<ol>
+  <li id="start" style="color: grey;">turbo:submit-start</li>
+  <li id="request" style="color: grey;">turbo:before-fetch-request</li>
+  <li id="response" style="color: grey;">turbo:before-fetch-response</li>
+  <li id="end" style="color: grey;">turbo:submit-end</li>
+</ol>
+
+<turbo-frame id="form-submit-events">
+  <p style="padding: 1rem; border: 1px solid grey">
+    form submission events [UNSTARTED]
+  </p>
+</turbo-frame>
+
+<script>
+  var form = document.getElementById("events")
+  form.addEventListener("turbo:submit-start", async (event) => {
+    setTimeout(() => {
+      document.getElementById("start").style.color = "green"
+    }, 500)
+  })
+
+  form.addEventListener("turbo:before-fetch-request", async (event) => {
+    setTimeout(() => {
+      document.getElementById("request").style.color = "green"
+    }, 750)
+  })
+
+  form.addEventListener("turbo:before-fetch-response", async (event) => {
+    setTimeout(() => {
+      document.getElementById("response").style.color = "green"
+    }, 1000)
+  })
+
+  form.addEventListener("turbo:submit-end", async (event) => {
+    setTimeout(() => {
+      document.getElementById("end").style.color = "green"
+    }, 1250)
+  })
+</script>
+
+<br>
+
+<form
+   id="events2"
+   action="/examples/five"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   data-turbo-frame="form-submit-events2"
+   >
+  <input type="submit" value="Cancelling Form Submission">
+</form>
+
+Events:
+<ol>
+  <li id="start2" style="color: grey;">turbo:submit-start</li>
+  <li id="request2" style="color: grey;">turbo:before-fetch-request</li>
+  <li id="response2" style="color: grey;">turbo:before-fetch-response</li>
+  <li id="end2" style="color: grey;">turbo:submit-end</li>
+</ol>
+
+<turbo-frame id="form-submit-events2">
+  <p style="padding: 1rem; border: 1px solid grey">
+    form submission events [UNSTARTED]
+  </p>
+</turbo-frame>
+
+<script>
+  var form = document.getElementById("events2")
+  form.addEventListener("turbo:submit-start", async (event) => {
+      document.getElementById("start2").style.color = "green"
+      event.detail.formSubmission.stop()
+  })
+
+  form.addEventListener("turbo:before-fetch-request", async (event) => {
+    document.getElementById("request2").style.color = "green"
+  })
+
+  form.addEventListener("turbo:before-fetch-response", async (event) => {
+    document.getElementById("response2").style.color = "green"
+  })
+
+  form.addEventListener("turbo:submit-end", async (event) => {
+    document.getElementById("end2").style.color = "green"
+  })
+</script>
+
+<br>
+
+<a href="/examples/seven"
+     data-turbo="true"
+     data-turbo-stream="true"
+     data-action="advance">Pause rendering</a>

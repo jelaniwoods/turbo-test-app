@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   post "/" => "examples#one"
   get "examples/one"
   get "examples/two"
+  post "examples/two"
   get "examples/three"
   post "examples/three"
   get "examples/four"
   get "examples/five"
+  post "examples/five"
+  get "examples/six"
+  get "examples/seven"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
