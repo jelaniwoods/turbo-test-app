@@ -31,5 +31,6 @@ class ExamplesController < ApplicationController
   end
 
   def five
+    sleep 5
   end
 end

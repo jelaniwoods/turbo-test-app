@@ -376,27 +376,19 @@ https://hotwire.io/documentation/turbo/reference/events
 <script>
   var form = document.getElementById("events")
   form.addEventListener("turbo:submit-start", async (event) => {
-    setTimeout(() => {
-      document.getElementById("start").style.color = "green"
-    }, 500)
+    document.getElementById("start").style.color = "green"
   })
 
   form.addEventListener("turbo:before-fetch-request", async (event) => {
-    setTimeout(() => {
-      document.getElementById("request").style.color = "green"
-    }, 750)
+    document.getElementById("request").style.color = "green"
   })
 
   form.addEventListener("turbo:before-fetch-response", async (event) => {
-    setTimeout(() => {
-      document.getElementById("response").style.color = "green"
-    }, 1000)
+    document.getElementById("response").style.color = "green"
   })
 
   form.addEventListener("turbo:submit-end", async (event) => {
-    setTimeout(() => {
-      document.getElementById("end").style.color = "green"
-    }, 1250)
+    document.getElementById("end").style.color = "green"
   })
 </script>
 
