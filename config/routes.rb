@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "md" => "application#md"
   root "examples#one"
   post "/" => "examples#one"
   get "examples/one"
