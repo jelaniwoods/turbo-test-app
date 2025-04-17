@@ -1,3 +1,7 @@
+Aside from `GET`, you can make a link use a different HTTP method.
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods#safe_idempotent_and_cacheable_request_methods
+
 <a href="/turbo/performing_visits_with_a_different_method"
      data-turbo="true"
      data-turbo-stream="true"

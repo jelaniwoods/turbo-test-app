@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "turbo#application_visits"
+  root "turbo#index"
+  get "turbo/index"
   get "turbo/application_visits"
   get "turbo/restoration_visits"
   get "turbo/canceling_visits"
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   get "turbo/pausing_rendering"
   get "turbo/pausing_requests"
   match "turbo/performing_visits_with_a_different_method", via: :all
+
+  # ----- old routes -----
   get "md" => "application#md"
 
   # root "examples#one"
