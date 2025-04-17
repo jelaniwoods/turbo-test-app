@@ -56,7 +56,4 @@ group :development do
   gem "web-console"
 end
 
-gem "redcarpet"
-gem "rouge"
-
 gem "markdown_views"

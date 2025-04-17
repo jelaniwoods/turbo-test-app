@@ -1,26 +1,8 @@
-<small>all examples are with the assumption that Turbo is <em>opt-in</em> and globally off.</small>
 <h1 id="application-visits">Application Visits</h1>
 
 <h2>Links</h2>
 
 <h3 id="advance">Advance</h3>
-
-<p>A simple "how to make a link submit a TURBO_STREAM GET request" with the default "advance" action where the history of page navigation is remembered.</p>
-
-Code:
-
-<%= md(
-  <<~STRING
-  ```html
-  <a href="/examples/one"
-      data-turbo="true"
-      data-turbo-stream="true"
-      data-action="advance">Advance</a>
-  ```
-  STRING
-) %>
-
-Example:
 
 <a href="/examples/one"
      data-turbo="true"
@@ -28,23 +10,6 @@ Example:
      data-action="advance">Advance</a>
 
 <br>
-
-<p>The docs say you can specify a fragment in the href and Turbo Drive will autoscroll to it.</p>
-
-Code:
-
-<%= md(
-  <<~STRING
-  ```html
-<a href="/examples/one#advance"
-     data-turbo="true"
-     data-turbo-stream="true"
-     data-action="advance">Advance (with fragment)</a>
-  ```
-  STRING
-) %>
-
-Example:
 
 <a href="/examples/one#advance"
      data-turbo="true"
@@ -61,23 +26,7 @@ Example:
 
 <h3 id="replace">Replace</h3>
 
-<p>How to replace the current page <em>and</em> the latest page the browser remembers</p>
 <br>
-<p>Same thing, but with fragment in href</p>
-Code:
-
-<%= md(
-  <<~STRING
-  ```html
-<a href="/"
-     data-turbo="true"
-     data-turbo-stream="true"
-     data-action="replace">Replace</a>
-  ```
-  STRING
-) %>
-
-Example:
 
 <a href="/"
      data-turbo="true"
@@ -85,21 +34,6 @@ Example:
      data-action="replace">Replace</a>
 
 <br>
-
-Code:
-
-<%= md(
-  <<~STRING
-  ```html
-<a href="#replace"
-     data-turbo="true"
-     data-turbo-stream="true"
-     data-action="replace">Replace (with fragment)</a>
-  ```
-  STRING
-) %>
-
-Example:
 
 <a href="#replace"
      data-turbo="true"
