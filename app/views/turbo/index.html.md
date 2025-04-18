@@ -9,14 +9,14 @@
 8. [Requiring Confirmation for a Visit](/turbo/requiring_confirmation_for_a_visit)
 9. [Disabling Turbo Drive on Specific Links or Forms](/turbo/disabling_turbo_drive_on_specific_links_or_forms)
 10. [View transitions](/turbo/view_transitions)
-11. Displaying Progress
-12. Reloading When Assets Change
-13. Removing Assets When They Change
-14. Ensuring Specific Pages Trigger a Full Reload
-15. Setting a Root Location
-16. Form Submissions
-17. Redirecting After a Form Submission
-18. Streaming After a Form Submission
-19. Prefetching Links on Hover
-20. Preload Links Into the Cache
-21. Ignored Paths
+11. [Displaying Progress](/turbo/displaying_progress)
+12. [Reloading When Assets Change](/turbo/reloading_when_assets_change)
+13. [Removing Assets When They Change](/turbo/removing_assets_when_they_change)
+14. [Ensuring Specific Pages Trigger a Full Reload](/turbo/ensuring_specific_pages_trigger_a_full_reload)
+15. [Setting a Root Location](/turbo/setting_a_root_location)
+16. [Form Submissions](/turbo/form_submissions)
+17. [Redirecting After a Form Submission](/turbo/redirecting_after_a_form_submission)
+18. [Streaming After a Form Submission](/turbo/streaming_after_a_form_submission)
+19. [Prefetching Links on Hover](/turbo/prefetching_links_on_hover)
+20. [Preload Links Into the Cache](/turbo/preload_links_Into_the_cache)
+21. [Ignored Paths](/turbo/ignored_paths)

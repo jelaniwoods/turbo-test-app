@@ -8,6 +8,20 @@ Rails.application.routes.draw do
   get "turbo/pausing_rendering"
   get "turbo/pausing_requests"
   match "turbo/performing_visits_with_a_different_method", via: :all
+  get "turbo/requiring_confirmation_for_a_visit"
+  get "turbo/disabling_turbo_drive_on_specific_links_or_forms"
+  get "turbo/view_transitions"
+  get "turbo/displaying_progress"
+  get "turbo/reloading_when_assets_change"
+  get "turbo/removing_assets_when_they_change"
+  get "turbo/ensuring_specific_pages_trigger_a_full_reload"
+  get "turbo/setting_a_root_location"
+  get "turbo/form_submissions"
+  get "turbo/redirecting_after_a_form_submission"
+  get "turbo/streaming_after_a_form_submission"
+  get "turbo/prefetching_links_on_hover"
+  get "turbo/preload_links_Into_the_cache"
+  get "turbo/ignored_paths"
 
   # ----- old routes -----
   get "md" => "application#md"

@@ -14,3 +14,28 @@
     }
   </script>
 </turbo-frame>
+
+<turbo-frame id="turbo-progress-green">
+  <style>
+    .turbo-progress-bar {
+      height: 5px;
+      background-color: green;
+    }
+  </style>
+
+  <a href="/turbo/displaying_progress"
+     data-turbo="true"
+     data-turbo-stream="true">Reset</a>
+</turbo-frame>
+
+<turbo-frame id="turbo-progress-hidden">
+  <style>
+    .turbo-progress-bar {
+      visibility: hidden;
+    }
+  </style>
+
+  <a href="/turbo/displaying_progress"
+     data-turbo="true"
+     data-turbo-stream="true">Reset</a>
+</turbo-frame>
