@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # get "events" => "events#index"
+  # get "public" => "public#index"
+  # get "logs" => "logs#show"
+
   root "turbo#index"
   get "turbo/index"
   get "turbo/application_visits"
