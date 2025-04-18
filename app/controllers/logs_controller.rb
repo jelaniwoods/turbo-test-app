@@ -6,7 +6,7 @@ class LogsController < ApplicationController
     # puts "--->"
     # p Rails.root.join("log", "#{Rails.env}.log")
     # puts "---"
-    
+
     # File.open(Rails.root.join("log", "#{Rails.env}.log"), "r") do |file|
     #   file.seek(0, IO::SEEK_END) # start reading from the end of the file
     #   loop do

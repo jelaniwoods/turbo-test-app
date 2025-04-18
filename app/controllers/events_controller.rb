@@ -2,9 +2,9 @@ class EventsController < ApplicationController
   include ActionController::Live
 
   def index
-    response.headers['Content-Type'] = 'text/event-stream'
-    response.headers['Last-Modified'] = Time.now.httpdate
-    
+    response.headers["Content-Type"] = "text/event-stream"
+    response.headers["Last-Modified"] = Time.now.httpdate
+
     sse = SSE.new(response.stream, event: "message")
     File.open(Rails.root.join("log", "#{Rails.env}.log"), "r") do |file|
     file.seek(0, IO::SEEK_END) # start reading from the end of the file

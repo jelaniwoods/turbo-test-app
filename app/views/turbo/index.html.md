@@ -20,3 +20,18 @@
 19. [Prefetching Links on Hover](/turbo/prefetching_links_on_hover)
 20. [Preload Links Into the Cache](/turbo/preload_links_Into_the_cache)
 21. [Ignored Paths](/turbo/ignored_paths)
+
+---
+
+## TODOs
+
+- [ ] Update syntax highlighting theme. (I like the RailsCast theme, maybe import or make that)
+- [ ] Improve codeblock styling
+- [ ] Improve fonts
+- [ ] Find/Add table of content extension to markdown_views or commonmark
+- [ ] Figure out how to stream server log to specific pages for demo purposes
+- [x] Fix tasklist
+  - [ ] Improve tasklist styling
+- [ ] Make headers reveal permalinks on hover
+
+

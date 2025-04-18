@@ -14,16 +14,16 @@ class ExamplesController < ApplicationController
   def three
     if params.key?(:required) && params[:required].blank?
       @unprocessable_entity = true
-      render :one, status: :unprocessable_entity 
+      render :one, status: :unprocessable_entity
     elsif params.key?(:required_500) && params[:required_500].blank?
       @internal_server_error = true
-      render :one, status: :internal_server_error 
+      render :one, status: :internal_server_error
     elsif params.key?(:frame_request) && turbo_frame_request?
       @frame_request = true
-      render :one, status: :internal_server_error 
+      render :one, status: :internal_server_error
     elsif params.key?(:ok)
       @ok = true
-      render :one, status: :ok 
+      render :one, status: :ok
     end
   end
 

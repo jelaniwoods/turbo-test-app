@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get "turbo/ensuring_specific_pages_trigger_a_full_reload"
   get "turbo/setting_a_root_location"
   get "turbo/form_submissions"
-  get "turbo/redirecting_after_a_form_submission"
+  match "turbo/redirecting_after_a_form_submission", via: [ :get, :post ]
   get "turbo/streaming_after_a_form_submission"
   get "turbo/prefetching_links_on_hover"
   get "turbo/preload_links_Into_the_cache"

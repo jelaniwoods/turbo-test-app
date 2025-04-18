@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
   def rouge_syntax_highlighting
     MarkdownViews.rouge_opts.merge! formatter: Rouge::Formatters::HTMLInline.new("github")
-    MarkdownViews.extensions.merge! tagfilter: false
+    MarkdownViews.extensions.merge! tagfilter: false, tasklist: true
   end
 end
