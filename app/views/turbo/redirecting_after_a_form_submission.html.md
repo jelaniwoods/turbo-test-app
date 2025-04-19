@@ -1,26 +1,28 @@
 
 #### can render server side validations in place (500)
 
+Code:
+
 ```erb
 <form
    action="/turbo/redirecting_after_a_form_submission"
    method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="post"
-   >
+   data-turbo-method="post">
    <input type="text" name="required_500" placeholder="leave this empty" style="<%%= "border: 2px solid red" if @internal_server_error %>">
   <input type="submit">
 </form>
 ```
+
+Example:
 
 <form
    action="/turbo/redirecting_after_a_form_submission"
    method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="post"
-   >
+   data-turbo-method="post">
    <input type="text" name="required_500" placeholder="leave this empty" style="<%= "border: 2px solid red" if @internal_server_error %>">
   <input type="submit">
 </form>
@@ -30,6 +32,8 @@
 
 https://github.com/hotwired/turbo/issues/37#issuecomment-1768347223
 
+Code:
+
 ```erb
 <turbo-frame id="form">
   <form
@@ -37,13 +41,14 @@ https://github.com/hotwired/turbo/issues/37#issuecomment-1768347223
     method="post"
     data-turbo="true"
     data-turbo-stream="true"
-    data-turbo-method="post"
-    >
+    data-turbo-method="post">
     <input type="text" name="frame_request" placeholder="leave this empty" style="<%%= "border: 2px solid red" if @frame_request %>">
     <input type="submit">
   </form>
 </turbo-frame>
 ```
+
+Example:
 
 <turbo-frame id="form">
   <form
@@ -51,8 +56,7 @@ https://github.com/hotwired/turbo/issues/37#issuecomment-1768347223
     method="post"
     data-turbo="true"
     data-turbo-stream="true"
-    data-turbo-method="post"
-    >
+    data-turbo-method="post">
     <input type="text" name="frame_request" placeholder="leave this empty" style="<%= "border: 2px solid red" if @frame_request %>">
     <input type="submit">
   </form>
@@ -65,6 +69,8 @@ https://github.com/hotwired/turbo/issues/37#issuecomment-1768347223
 
 > The reason Turbo doesn’t allow regular rendering on 200’s from POST requestsis that browsers have built-in behavior for dealing with reloads on POST visits where they present a “Are you sure you want to submit this form again?” dialogue that Turbo can’t replicate. Instead, Turbo will stay on the current URL upon a form submission that tries to render, rather than change it to the form action, since a reload would then issue a GET against that action URL, which may not even exist.
 
+The following form will submit but won't update the page.
+
 Code:
 
 ```erb
@@ -73,8 +79,7 @@ Code:
    method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="post"
-   >
+   data-turbo-method="post">
    <input type="text" name="ok" placeholder="leave this empty" style="<%= "border: 2px solid green" if @ok %>">
   <input type="submit">
 </form>
@@ -87,9 +92,97 @@ Example:
    method="post"
    data-turbo="true"
    data-turbo-stream="true"
-   data-turbo-method="post"
-   >
+   data-turbo-method="post">
 
    <input type="text" name="ok" placeholder="leave this empty" style="<%= "border: 2px solid green" if @ok %>">
   <input type="submit">
 </form>
+
+---
+
+Can render response within `<turbo-frame>`
+
+> If the form submission is a GET request, you may render the directly rendered response by giving the form a data-turbo-frame target. If you’d like the URL to update as part of the rendering also pass a data-turbo-action attribute.
+
+#### [GET]
+
+Code:
+
+```html
+<form
+   action="/examples/two"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   data-turbo-frame="form-submit-get"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-get">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+```
+
+Example:
+
+<form
+   action="/examples/two"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   data-turbo-frame="form-submit-get"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-get">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+
+#### [POST] rendering _redirected_ content in `<turbo-frame>`
+
+```html
+<form
+   action="/examples/two"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   data-turbo-frame="form-submit-post"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-post">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+```
+
+Example:
+
+<form
+   action="/examples/two"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="post"
+   data-turbo-frame="form-submit-post"
+   >
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-post">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+

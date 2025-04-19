@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root "turbo#index"
   get "turbo/index"
-  get "turbo/application_visits"
+  match "turbo/application_visits", via: [:get, :post]
   get "turbo/restoration_visits"
   get "turbo/canceling_visits"
   get "turbo/custom_rendering"
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "turbo/pausing_requests"
   match "turbo/performing_visits_with_a_different_method", via: :all
   get "turbo/requiring_confirmation_for_a_visit"
-  get "turbo/disabling_turbo_drive_on_specific_links_or_forms"
+  match "turbo/disabling_turbo_drive_on_specific_links_or_forms", via: [:get, :post]
   get "turbo/view_transitions"
   get "turbo/displaying_progress"
   get "turbo/reloading_when_assets_change"

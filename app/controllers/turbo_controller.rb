@@ -1,4 +1,6 @@
 class TurboController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def redirecting_after_a_form_submission
     if params.key?(:required) && params[:required].blank?
       @unprocessable_entity = true

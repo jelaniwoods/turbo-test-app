@@ -1,6 +1,9 @@
 
 ## Canceling requests
 
+- The server log _does_ record a request to the `href`.
+- The page from the visit **is not rendered**.
+
 Code:
 
 ```html
