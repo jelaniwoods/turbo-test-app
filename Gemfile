@@ -57,3 +57,4 @@ group :development do
 end
 
 gem "markdown_views"
+gem "coderay"
