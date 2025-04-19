@@ -33,5 +33,6 @@
 - [x] Fix tasklist
   - [ ] Improve tasklist styling
 - [ ] Make headers reveal permalinks on hover
+- [ ] Add navigation bar or main TOC based on index on other pages
 
 
