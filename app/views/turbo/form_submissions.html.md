@@ -446,3 +446,29 @@ form.addEventListener("turbo:submit-end", ( { target } ) => {
   })
 </script>
 
+---
+
+You can customize the input/button text after a submission with the`data-turbo-submits-with` attribute.
+
+
+```html
+<form
+   action="/"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+  <input type="submit" data-turbo-submits-with="hold on to your butts!">
+</form>
+```
+
+<form
+   action="/"
+   method="post"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   >
+  <input type="submit" data-turbo-submits-with="hold on to your butts!">
+</form>

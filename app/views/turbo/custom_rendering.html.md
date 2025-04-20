@@ -1,6 +1,9 @@
 
 ## Custom rendering
 
+You can customize how new elements are rendered.
+
+
 Code:
 
 ```html

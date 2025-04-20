@@ -14,3 +14,19 @@ The `data-turbo-preload` attribute won’t have any effect on links that:
 
 Works nice with eager/lazy-loading frames.
 
+Preloaded `<a>` elements will dispatch `turbo:before-fetch-request` and `turbo:before-fetch-response` events. 
+
+You can identify 
+
+>  a preloading turbo:before-fetch-request initiated event from an event initiated by another mechanism, check whether the request’s X-Sec-Purpose header (read from the event.detail.fetchOptions.headers["X-Sec-Purpose"] property) is set to "prefetch":
+
+```js
+addEventListener("turbo:before-fetch-request", (event) => {
+  if (event.detail.fetchOptions.headers["X-Sec-Purpose"] === "prefetch") {
+    // do additional preloading setup…
+  } else {
+    // do something else…
+  }
+})
+```
+not entirely sure how this is useful or what the other case could be

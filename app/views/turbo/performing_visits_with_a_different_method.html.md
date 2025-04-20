@@ -1,6 +1,8 @@
 # Performing visits with a different method
 
-#### Aside from `GET`, you can make a link use a different HTTP method.
+Aside from `GET`, you can make a link use a different HTTP method.
+
+It's still encouraged to use forms for methods other than `GET`.
 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods#safe_idempotent_and_cacheable_request_methods
 
