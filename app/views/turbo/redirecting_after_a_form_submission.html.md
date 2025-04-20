@@ -149,8 +149,56 @@ Code:
    data-turbo="true"
    data-turbo-stream="true"
    data-turbo-method="get"
+   data-turbo-frame="form-submit-get">
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-get">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+```
+
+The page that the form actions renders looks like
+
+```html
+<turbo-frame id="form-submit-get">
+  <p style="border: 1px solid blue; padding: 1rem">[GET] this is content rendered from a completely different controller action</p>
+</turbo-frame>
+```
+
+Example:
+
+<form
+   action="/examples/two"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
+   data-turbo-frame="form-submit-get">
+  <input type="submit">
+</form>
+
+<turbo-frame id="form-submit-get">
+  <p style="padding: 1rem; border: 1px solid black;">
+    submit the form and I'll change!
+  </p>
+</turbo-frame>
+
+#### [GET] Rendering `<turbo-frame>` from next page and changing Window location
+
+Code:
+
+```html
+<form
+   action="/examples/two"
+   method="get"
+   data-turbo="true"
+   data-turbo-stream="true"
+   data-turbo-method="get"
    data-turbo-frame="form-submit-get"
-   >
+   data-turbo-action="advance">
   <input type="submit">
 </form>
 
@@ -178,7 +226,7 @@ Example:
    data-turbo-stream="true"
    data-turbo-method="get"
    data-turbo-frame="form-submit-get"
-   >
+   data-turbo-action="advance">
   <input type="submit">
 </form>
 
@@ -197,8 +245,7 @@ Example:
    data-turbo="true"
    data-turbo-stream="true"
    data-turbo-method="post"
-   data-turbo-frame="form-submit-post"
-   >
+   data-turbo-frame="form-submit-post">
   <input type="submit">
 </form>
 
@@ -226,8 +273,7 @@ Example:
    data-turbo="true"
    data-turbo-stream="true"
    data-turbo-method="post"
-   data-turbo-frame="form-submit-post"
-   >
+   data-turbo-frame="form-submit-post">
   <input type="submit">
 </form>
 

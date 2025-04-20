@@ -33,4 +33,8 @@ class ExamplesController < ApplicationController
   def five
     sleep 5
   end
+
+  def nine
+    # redirect_to "/examples/ten"
+  end
 end

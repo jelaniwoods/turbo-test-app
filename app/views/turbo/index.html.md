@@ -29,6 +29,7 @@
   - I think the RailsCast "theme" is using `CodeRay`, which operates differently than `Rouge` and means I probably need to write something custom to have it work seamlessly with `markdown_views`. Or I need to find/extract the `CodeRay` CSS to work with Rouge.
   - CodeMirror 5 has a Railscasts theme! https://codemirror.net/5/demo/theme.html#railscasts
 - [ ] Improve codeblock styling
+  - [ ] being able to highlight specific lines and/or columns
 - [ ] Improve fonts
 - [ ] Find/Add table of content extension to `markdown_views` or `commonmark`
 - [ ] Figure out how to stream server log to specific pages for demo purposes
